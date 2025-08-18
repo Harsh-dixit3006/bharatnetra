@@ -56,34 +56,15 @@ document
     }, 1500);
   });
 
-// Tool button functionality
-function showPage(page) {
-  // Hide all pages
-  document.querySelectorAll(".tools-page").forEach((pg) => {
-    pg.classList.remove("active");
-  });
-
-  // Show selected page
-  document.getElementById("page" + page).classList.add("active");
-
-  // Update active button
-  document.querySelectorAll(".page-btn").forEach((btn) => {
-    btn.classList.remove("active");
-  });
-  document
-    .querySelector(".page-btn:nth-child(" + page + ")")
-    .classList.add("active");
-}
-
 // Header scroll effect
 window.addEventListener("scroll", function () {
   const header = document.querySelector("header");
-  if (window.scrollY > 100) {
-    header.style.background = "rgba(10, 10, 26, 0.98)";
-    header.style.boxShadow = "0 5px 20px rgba(0, 0, 0, 0.3)";
+  // Use a class for styling on scroll for better performance and separation of concerns.
+  // A threshold of 50px makes the effect trigger sooner.
+  if (window.scrollY > 50) {
+    header.classList.add("scrolled");
   } else {
-    header.style.background = "rgba(10, 10, 26, 0.95)";
-    header.style.boxShadow = "none";
+    header.classList.remove("scrolled");
   }
 });
 
@@ -292,17 +273,6 @@ document.querySelectorAll(".cta-btn").forEach((button) => {
   });
 });
 
-// Add hover effects for team cards
-document.querySelectorAll(".team-card").forEach((card) => {
-  card.addEventListener("mouseenter", function () {
-    this.style.transform = "translateY(-10px) scale(1.02)";
-  });
-
-  card.addEventListener("mouseleave", function () {
-    this.style.transform = "translateY(0) scale(1)";
-  });
-});
-
 // Add typing effect for mission text
 function typeWriter(element, text, speed = 100) {
   let i = 0;
@@ -464,4 +434,3 @@ rippleStyle.textContent = `
     }
 `;
 document.head.appendChild(rippleStyle);
-
